@@ -1,0 +1,13 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+
+.business {
+    margin-bottom: 5px;
+    border-bottom: 1px solid slategray;
+}
+.agent {
+    margin-bottom: 5px;
+    border-bottom: 1px solid slategray;
+}
