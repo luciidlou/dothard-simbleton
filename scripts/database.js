@@ -196,9 +196,3 @@ export const getSum = (businessObject) => {
   }
   return sum
 }
-
-// Function to find the FIRST business that matches the search Criteria
-// export const findBusiness = (searchCriteria) => {
-//     const matchingBusiness = businesses.find(business => business.companyName === searchCriteria)
-//     return matchingBusiness
-// }

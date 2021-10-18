@@ -1,7 +1,9 @@
-import { getBusinesses, getSum } from "./database.js";
+import { getBusinesses } from "./database.js";
 import { getNewYorkBusinesses } from "./database.js";
+import { getPurchasingAgents } from "./database.js";
 import { getManufacturingBusinesses } from "./database.js";
-import { business } from "./Business.js"
+import { business, businessSearch } from "./Business.js"
+import { agentSearch } from "./Agent.js";
 
 
 const mainContainer = document.querySelector("#businessList")
@@ -45,6 +47,7 @@ export const manufacturingBusinessList = () => {
 
 
 const companySearchResultArticle = document.querySelector(".foundCompanies")
+const agentSearchResultArticle = document.querySelector(".foundAgents")
 
 
 document
@@ -62,9 +65,38 @@ document
 
                         Example: business.companyName.includes(keyPressEvent.target.value)
                     */
-
-                    const foundBusiness = businessArray.find(business => business.companyName.includes(keyPressEvent.target.value))/** implement .find() method here */
+                    const searchCriteria = keyPressEvent.target.value
+                    const foundBusiness = businessArray.find(business => business.companyName.includes(searchCriteria.charAt(0).toUpperCase() + searchCriteria.slice(1)))/** implement .find() method here */
                     // debugger
-                    companySearchResultArticle.innerHTML = business(foundBusiness);
+                    companySearchResultArticle.innerHTML = businessSearch(foundBusiness);
+                }
+        });
+
+
+
+
+// Refactor your code to search for purchasing agents instead. If the search text is found in the first name of any purchasing agent, show that agent.
+
+        document
+    .querySelector("#companySearch")
+        .addEventListener(
+            "keypress",
+            keyPressEvent => {
+                if (keyPressEvent.charCode === 13) {
+                    const purchasingAgents = getPurchasingAgents()
+                    /*
+                        When the user presses 'Enter', find the matching business.
+
+                        You can use the `.includes()` string method to
+                        see if a smaller string is part of a larger string.
+
+                        Example: business.companyName.includes(keyPressEvent.target.value)
+                    */
+                    const searchCriteria = keyPressEvent.target.value
+                    const foundAgent = purchasingAgents.find(
+                        agent => agent.fullName.includes(searchCriteria.charAt(0).toUpperCase() + searchCriteria.slice(1))
+                        )/** implement .find() method here */
+                    // debugger
+                    agentSearchResultArticle.innerHTML = agentSearch(foundAgent);
                 }
         });
